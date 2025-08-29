@@ -34,5 +34,5 @@ this program should should scroll to the next youtube short/instragram reel when
 
 
 
-### hours wasted on this project (iuncrement counter before commit)
+### hours wasted on this project (increment counter before commit)
 - 5
