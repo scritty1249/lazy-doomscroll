@@ -20,8 +20,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
+STOP = False
+
 PREV_BUTTON_ID = "navigation-button-up"
 NEXT_BUTTON_ID = "navigation-button-down"
+LIKE_BUTTON_ID = "like-button"
+DISLIKE_BUTTON_ID = "dislike-button"
 
 driver = webdriver.Edge()
 #driver.set_permissions('camera', 'denied')
@@ -30,9 +34,13 @@ driver.maximize_window()
 driver.get("https://www.youtube.com/shorts")
 wait = WebDriverWait(driver,5)  
 
-next_button = wait.until(EC.presence_of_element_located((By.ID, NEXT_BUTTON_ID)))
-prev_button = driver.find_element(By.ID, PREV_BUTTON_ID)
+dislike_button = wait.until(EC.presence_of_element_located((By.ID, DISLIKE_BUTTON_ID)))
 video_container = driver.find_element(By.TAG_NAME, "video")
+next_button = driver.find_element(By.ID, NEXT_BUTTON_ID)
+next_button.click()
+prev_button = driver.find_element(By.ID, PREV_BUTTON_ID)
+like_button = driver.find_element(By.ID, LIKE_BUTTON_ID)
+
 
 def draw_landmarks_on_image(rgb_image, detection_result):
     hand_landmarks_list = detection_result.hand_landmarks
@@ -83,6 +91,7 @@ def print_result(result: GestureRecognizerResult, output_image: mp.Image, timest
     global last_action_ms
     global aframe
     global FRAME_STATE
+    global STOP
     FRAME_STATE = 0
     aframe = draw_landmarks_on_image(output_image, result)
     FRAME_STATE = 1
@@ -98,6 +107,12 @@ def print_result(result: GestureRecognizerResult, output_image: mp.Image, timest
             elif gesture == "Victory":
                 video_container.click()
                 last_action_ms = timestamp_ms
+            elif gesture == "Thumb_Up":
+                like_button.click()
+                last_action_ms = timestamp_ms
+            elif gesture == "Thumb_Down":
+                dislike_button.click()
+                last_action_ms = timestamp_ms
             gesture = result.gestures[1][0].category_name
             if gesture == "Open_Palm":
                 next_button.click()
@@ -108,6 +123,15 @@ def print_result(result: GestureRecognizerResult, output_image: mp.Image, timest
             elif gesture == "Victory":
                 video_container.click()
                 last_action_ms = timestamp_ms
+            elif gesture == "Thumb_Up":
+                like_button.click()
+                last_action_ms = timestamp_ms
+            elif gesture == "Thumb_Down":
+                dislike_button.click()
+                last_action_ms = timestamp_ms
+
+            if result.gestures[0][0].category_name == result.gestures[1][0].category_name and result.gestures[1][0].category_name == "Closed_Fist":
+                STOP = True
     except:
         #print("failed to access gesture")
         ...
@@ -125,7 +149,7 @@ with GestureRecognizer.create_from_options(options) as recognizer:
     start_time = perf_counter_ms()
     cap = cv2.VideoCapture(CAMERA_INPUT)
     # Create a loop to read the latest frame from the camera using VideoCapture#read()
-    while cap.isOpened():
+    while cap.isOpened() and not STOP:
         _ , frame = cap.read()
         #image = cv2.flip(frame, 1)
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
