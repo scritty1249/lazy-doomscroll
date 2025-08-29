@@ -26,9 +26,9 @@ this program should should scroll to the next youtube short/instragram reel when
 [download latest](https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recognizer/float16/latest/gesture_recognizer.task)\
 [docs](https://ai.google.dev/edge/mediapipe/solutions/vision/gesture_recognizer)
 
-**Hand Landmarker**
-*individual model used in testing*
-[download latest](https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/hand_landmarker.task)
+**Hand Landmarker**\
+*individual model used in testing*\
+[download latest](https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/hand_landmarker.task)\
 [docs](https://ai.google.dev/edge/mediapipe/solutions/vision/hand_landmarker)
 
 
