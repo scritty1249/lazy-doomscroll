@@ -1,22 +1,15 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.common.keys import Keys
-import time
 
 PREV_BUTTON_ID = "navigation-button-up"
 NEXT_BUTTON_ID = "navigation-button-down"
 
-options = webdriver.edge.options.Options()
-options.add_argument("--start-maximized")
-
-driver = webdriver.Edge(options=options)
+driver = webdriver.Edge()
 #driver.set_permissions('camera', 'denied')
-driver.implicitly_wait(1)
-
+driver.set_window_position(-2000, 1) # move it onto the left monitor- i.e. as far left as possible lmao
+driver.maximize_window()
 driver.get("https://www.youtube.com/shorts")
 wait = WebDriverWait(driver,5)  
 
