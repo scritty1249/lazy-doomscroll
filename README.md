@@ -25,7 +25,7 @@ this program should should scroll to the next youtube short/instragram reel when
 
 # Google MediaPipe models
 **Gesture Recognizer**\
-*comes packages with hand landmrker*\
+*comes packaged with hand landmarker*\
 [download latest](https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recognizer/float16/latest/gesture_recognizer.task)\
 [docs](https://ai.google.dev/edge/mediapipe/solutions/vision/gesture_recognizer)
 
@@ -37,5 +37,5 @@ this program should should scroll to the next youtube short/instragram reel when
 
 
 
-### hours wasted on this project (increment counter before commit)
+### hours wasted on this project (increment counter before commiting)
 - 10
