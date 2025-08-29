@@ -57,6 +57,7 @@ actions = {
 
 
 def gestureCallback(result: "mediapipe.tasks.vision.GestureRecognizerResult", output_image: Image, timestamp_ms: int):
+    global gestures
     hand_landmarks_list = result.hand_landmarks
     handedness_list = result.handedness
     gestures_list = result.gestures
@@ -69,11 +70,16 @@ def gestureCallback(result: "mediapipe.tasks.vision.GestureRecognizerResult", ou
             RightTracker.append(gestures_list[idx][0].category_name, timestamp_ms)
         else: # left hand
             LeftTracker.append(gestures_list[idx][0].category_name, timestamp_ms)
-
+    print(True)
     for name, gs in gestures.items():
-        if RightTracker.contains(gs):
+        print(RightTracker)
+        print(RightTracker.sequence_view())
+        if RightTracker.sequence_view().contains(gs):
+            print("?")
             actions[name]()
             break
+        print("=")
+        
 
     if SHOW_CAM:
         return annotate_image(output_image, result)

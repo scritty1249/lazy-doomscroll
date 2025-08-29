@@ -82,19 +82,21 @@ class GestureData(object):
         return "<GestureData>%s" % str(self.__dict__)
 
 class GestureSequence(object):
-    def __init__(self, *data: Union[dict, list, GestureData]):
-        self._data = []
-        if isinstance(data[0], dict):
-            for d in data:
-                self._data.append(GestureData(d["gesture"], d["duration"]))
-        elif isinstance(data[0], list):
-            for d in data:
-                self._data.append(GestureData(d[0], d[1]))
-        elif isinstance(data[0], GestureData):
-            for d in data:
-                self._data.append(d)
-        else:
-            raise ValueError("Invalid input data type.")
+    def __init__(self, dat: Union[dict, list, GestureData] = None, *data: Union[dict, list, GestureData]):
+        self._data = list()
+        if dat is not None:
+            args = (dat, *data)
+            if isinstance(dat, dict):
+                for d in args:
+                    self._data.append(GestureData(d["gesture"], d["duration"]))
+            elif isinstance(dat, list):
+                for d in args:
+                    self._data.append(GestureData(d[0], d[1]))
+            elif isinstance(dat, GestureData):
+                for d in args:
+                    self._data.append(d)
+            else:
+                raise ValueError("Invalid input data type.")
         self._update_set()
 
     def __getitem__(self, index):
@@ -121,7 +123,7 @@ class GestureSequence(object):
         return self._data
     
     def _update_set(self):
-        self.gesture_set = set([gd.gesture for gd in self._data])
+        self.gesture_set = set() if len(self._data) == 0 else set([gd.gesture for gd in self._data])
 
     def equals(self, sequence: "GestureSequence") -> bool:
         if (
@@ -167,7 +169,7 @@ class GestureTracker(object):
                 self._data.append(GestureData(gesture, duration_ms))
             
     def sequence_view(self):
-        return GestureSequence(self())
+        return GestureSequence(*self())
 
     def __call__(self):
         return list(self._data)
