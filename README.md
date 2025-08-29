@@ -7,10 +7,13 @@ this program should should scroll to the next youtube short/instragram reel when
     - solution: implement a queue using a main thread for actions and subprocess for making calls to it ("adding it to the queue")
     - *actual solution: fixed incorrectly named variable when updating last action timestamp*
 - implement threading for action delay, and to remove script startup delay when initalizating the webdriver and OpenCV video feed
-- ! add complex, multi-step gestures for more concise user input
-    - implement counter / tracker consecutive gestures (ignoring delimiters like "None" gestures)
+- ~~add complex, multi-step gestures for more concise user input~~
+    - ~~implement counter / tracker consecutive gestures (ignoring delimiters like "None" gestures)~~
+    - *actual solution: done*
 - implement try/except/finally to maintain runtime even with errors and exit gracefully
+    - figure out why cv2 errors bypass try/except blocks- otherwise this is implemented
 - make this script easier to execute on the fly, for daily use
+- ! figure out why the program crashes with zero output, log, and doesnt execute the finally block after the `annotate_image` function
 
 # prerequisites
 - must have ms edge
