@@ -14,7 +14,7 @@ this program should should scroll to the next youtube short/instragram reel when
 
 # prerequisites
 - must have ms edge
-- must have a useable webcam bound to system bus 0 (find more [here](www.google.com/search?q=how+does+opencv+index+input+devices))
+- must have a useable webcam bound to system bus 0 (find more [here](https://www.google.com/search?q=how+does+opencv+index+input+devices))
 
 # libraries used
 - selenium
