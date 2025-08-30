@@ -8,5 +8,6 @@
         ]
     }
   },
-  "terminal.integrated.defaultProfile.windows": "venv-cmd"
+  "terminal.integrated.defaultProfile.windows": "venv-cmd",
+  "python.venvPath": "./.conda"
 }
