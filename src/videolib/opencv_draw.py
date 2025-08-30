@@ -39,3 +39,16 @@ def annotate_image(image: Image, detection_result: "mediapipe.tasks.vision.Gestu
             1, font_color, 1, cv2.LINE_AA)
     
     return annotated_image
+
+def black_image(width_px: int, height_px: int, text: str = ""):
+    font_face = cv2.FONT_HERSHEY_DUPLEX
+    img = np.zeros((width_px, height_px, 3), dtype = np.uint8)
+    text_width, text_height = cv2.getTextSize(text, font_face, 1, 1)[0]
+
+    center_coords = (
+        int(img.shape[1] / 2) - int(text_width / 2),
+        int(img.shape[0] / 2) + int(text_height / 2)
+    )
+    cv2.putText(img, text, center_coords, font_face,
+        1, (255, 0, 0), 1, cv2.LINE_AA)
+    return img
