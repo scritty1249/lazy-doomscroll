@@ -1,8 +1,9 @@
 # Description
-thought it would be funny to say i was too lazy to doomscroll
+thought it would be funny to say i was too lazy to doomscroll\
 this program should should scroll to the next youtube short/instragram reel when i flick my hand
 
 # todo
+- initalize browser with local user profile to automate signin on personal account- im tired of seeing the default youtube feed while I test this
 - implement threading for action delay, and to remove script startup delay when initalizating the webdriver and OpenCV video feed
 - make this script easier to execute on the fly, for daily use
 - ! fix like and dislike buttons failing to click
